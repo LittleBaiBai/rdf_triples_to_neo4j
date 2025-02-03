@@ -86,9 +86,8 @@ func importRDF(c *cli.Context) error {
 	}
 
 	// Import each file
-	containerMount := c.String("container-mount")
 	for _, file := range files {
-		result, err := loader.LoadTriples(file, containerMount)
+		result, err := loader.LoadTriples(file, c.String("container-mount"))
 		if err != nil {
 			log.Printf("❌ Error importing %s: %v\n", filepath.Base(file), err)
 			continue
@@ -102,7 +101,7 @@ func importRDF(c *cli.Context) error {
 
 	// Validate if schema file provided
 	if schemaFile := c.String("schema-file"); schemaFile != "" {
-		if err := loader.ValidateGraph(schemaFile, containerMount); err != nil {
+		if err := loader.ValidateGraph(schemaFile); err != nil {
 			log.Printf("❌ Validation failed: %v\n", err)
 		} else {
 			log.Println("✅ Validation passed")

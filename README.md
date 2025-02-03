@@ -16,5 +16,5 @@ GOOS=darwin GOARCH=arm64 go build -o rdf-triples  # For M1/M2/M3 Macs
     --username neo4j \
     --password password \
     --container-mount /uprise-outputs # optional: path where the triples are mounted in the Neo4j Docker container, leave out if you are using a local Neo4j instance \
-    --schema-file /path/to/constraints.ttl # optional: path to the SHACL constraints file
+    --schema-file /path/to/constraints.ttl # optional: path to the SHACL constraints file, needs to be docker mounted path for neo4j to access
 ```
